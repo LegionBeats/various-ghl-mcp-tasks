@@ -106,3 +106,15 @@ which is an A2P/TCPA risk.
 5. The email lands in the inbox (not promos/spam), and the download link works.
 6. The SMS arrives.
 7. Submit the same email again. It should not create a second opportunity.
+
+## Hosting (switched 2026-09-23)
+
+- Code: GitHub `LegionBeats/framer-freedom-project` (Lovable pushes here automatically).
+- Host: Cloudflare Worker `tanstack-start-app` (account thisisthelegion@gmail.com). Workers Builds
+  runs `npm run build` then `npx wrangler deploy` on every push.
+- Secret: `GHL_WEBHOOK_URL` is set on the Worker. If the GHL webhook changes, update it there. Lovable's secret no longer affects the live site.
+- DNS: `legionbeats.com` is a Worker custom domain. `www` is a CNAME to the root plus Page Rule (301 to root).
+  Bulk Redirects `prettylinks_from_legionbeats` (194 links) are unchanged.
+- The old WordPress host has been retired. To roll back, remove the Worker custom domain and re-add
+  `A @ 199.16.172.5` and `A @ 199.16.173.151` (both Proxied).
+- Lovable's "Publish" button no longer controls the live site.
